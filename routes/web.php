@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,40 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    // Runnig sql queries in laravel -> make use of the DB facade
+    // Selecting users from the database
+     // $users = DB::select("select * from users");
+    //  $users = DB::table('users')->find(3);
+    $users = User::all();
+    // creating users
+    // $user = DB::insert('insert into users(name, email, password) values (?, ?, ?)', ['Erick Kimani', 'kimanierick@gmail.com', 'password']);
+
+    // $user = DB::table('users')->insert([
+    //     'name' => 'Joseph Kimotho',
+    //     'email' => 'kimotho@gmail.com',
+    //     'password' => 'Kimothoquerybuilder'
+    // ]);
+    // $user = User::create([
+    //     'name' => 'Anne Mbeke',
+    //     'email' => 'anne@gmail.com',
+    //     'password' => 'passwordforannemodel'
+    // ]);
+
+
+    // $user = DB::update('update users set name = ? where id = ?', ['Joseph Kimotho', 2]);
+    // $user = DB::table('users')->where('id', 4)->update(['password' => 'passwordupdatedwithquerybuilder']);
+    // $user = User::find(5);
+    // $user = $user->update([
+    //     'email' => 'annembekeupdatefind@gmail.com'
+    // ]);
+
+    // Delete a user
+    // $user = DB::delete('delete from users where id = 2');
+    // $user = DB::table('users')->where('id', 4)->delete();
+    // $user = User::find(5)->delete();
+
+        dd($users);
 });
 
 Route::get('/dashboard', function () {
