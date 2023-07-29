@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\Profile\AvartarController;
 use App\Http\Controllers\ProfileController;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,12 +16,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    // return view('welcome');
+    return view('welcome');
     // Runnig sql queries in laravel -> make use of the DB facade
     // Selecting users from the database
      // $users = DB::select("select * from users");
     //  $users = DB::table('users')->find(3);
-    $users = User::all();
+    // $users = User::all();
+    // $user = User::find(1);
     // creating users
     // $user = DB::insert('insert into users(name, email, password) values (?, ?, ?)', ['Erick Kimani', 'kimanierick@gmail.com', 'password']);
 
@@ -31,8 +32,8 @@ Route::get('/', function () {
     //     'password' => 'Kimothoquerybuilder'
     // ]);
     // $user = User::create([
-    //     'name' => 'Anne Mbeke',
-    //     'email' => 'anne@gmail.com',
+    //     'name' => 'Anne Munee',
+    //     'email' => 'annemunee@gmail.com',
     //     'password' => 'passwordforannemodel'
     // ]);
 
@@ -49,7 +50,7 @@ Route::get('/', function () {
     // $user = DB::table('users')->where('id', 4)->delete();
     // $user = User::find(5)->delete();
 
-        dd($users);
+        // dd($user->name);
 });
 
 Route::get('/dashboard', function () {
@@ -59,6 +60,7 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::patch('/profile/avatar', [AvartarController::class, 'update'])->name('profile.avatar');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
