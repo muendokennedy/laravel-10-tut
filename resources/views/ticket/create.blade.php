@@ -13,12 +13,12 @@
                {{ session('message') }}
             </div>
         @endif
-        <form method="POST" action="{{ route('ticket.store') }}">
+        <form method="POST" action="{{ route('ticket.store') }}" enctype="multipart/form-data">
             @csrf
             <!-- The title -->
             <div>
                 <x-input-label for="title" :value="__('Title')" />
-                <x-text-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" required autofocus autocomplete="username" />
+                <x-text-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')"  autofocus />
                 @if($errors->any())
                 <p class="mt-2 text-sm text-red-600 dark:text-red-400 space-y-1">{{ $errors->first('title')}}</p>
                 @endif
@@ -34,13 +34,13 @@
                 <label for="attachment" class="mt-3 block font-medium text-sm text-gray-700 dark:text-gray-300">Attachment(If any)</label>
                 <x-file-input name="attachment" id="attachment" value="{{ old('attachment')}}"/>
                 @if($errors->any())
-                <p class="mt-2 text-sm text-red-600 dark:text-red-400 space-y-1">{{ $errors->first('avatar')}}</p>
+                <p class="mt-2 text-sm text-red-600 dark:text-red-400 space-y-1">{{ $errors->first('attachment')}}</p>
                 @endif
             </div>
 
             <div class="flex items-center justify-end mt-4">
                 <x-primary-button class="ml-3">
-                    save
+                    create ticket
                 </x-primary-button>
             </div>
         </form>

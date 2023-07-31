@@ -82,3 +82,4 @@ Route::get('/auth/callback', [GithubAuthController::class, 'callback']);
 Route::middleware('auth')->prefix('ticket')->name('ticket.')->group(function(){
     Route::resource('/', TicketController::class);
 });
+
