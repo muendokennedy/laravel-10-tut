@@ -1,11 +1,11 @@
 <?php
 
+use App\Http\Controllers\GithubAuthController;
 use App\Http\Controllers\Profile\AvartarController;
 use App\Http\Controllers\ProfileController;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Laravel\Socialite\Facades\Socialite;
+
 
 
 /*
@@ -74,20 +74,6 @@ require __DIR__.'/auth.php';
 
 // Aunthentication using github
 
-Route::post('/auth/redirect', function(){
-    return Socialite::driver('github')->stateless()->redirect();
-})->name('login.github');
+Route::post('/auth/redirect', [GithubAuthController::class, 'redirect'])->name('login.github');
 
-Route::get('/auth/callback', function(){
-    $githubUser = Socialite::driver('github')->stateless()->user();
-
-    $user = User::firstOrCreate([
-        'email' => $githubUser->email,
-    ], [
-        'name' => $githubUser->name,
-        'password' => 'password',
-    ]);
-    Auth::login($user);
-    return redirect(route('dashboard'))->with('message', 'The user has been logged in successfully with github');
-
-});
+Route::get('/auth/callback', [GithubAuthController::class, 'callback']);
