@@ -3,6 +3,7 @@
 use App\Http\Controllers\GithubAuthController;
 use App\Http\Controllers\Profile\AvartarController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TicketController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -77,3 +78,7 @@ require __DIR__.'/auth.php';
 Route::post('/auth/redirect', [GithubAuthController::class, 'redirect'])->name('login.github');
 
 Route::get('/auth/callback', [GithubAuthController::class, 'callback']);
+
+Route::middleware('auth')->prefix('ticket')->name('ticket.')->group(function(){
+    Route::resource('/', TicketController::class);
+});
