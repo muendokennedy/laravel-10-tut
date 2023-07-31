@@ -13,7 +13,7 @@
                {{ session('message') }}
             </div>
         @endif
-        <form method="POST" action="{{ route('ticket.create') }}">
+        <form method="POST" action="{{ route('ticket.store') }}">
             @csrf
             <!-- The title -->
             <div>
