@@ -17,6 +17,10 @@ class TicketController extends Controller
     {
         // Render a view
 
+        $tickets = Ticket::all();
+
+        return view('ticket.index', compact('tickets'));
+
     }
 
     /**
@@ -40,7 +44,7 @@ class TicketController extends Controller
             'user_id' => auth()->id(),
         ]);
 
-        if($request->file('attachment')){
+        if ($request->file('attachment')) {
 
             $extension = $request->file('attachment')->extension();
 
@@ -55,7 +59,7 @@ class TicketController extends Controller
             $ticket->update(['attachment' => $path]);
         }
 
-        return response()->redirect(route('ticket.index'));
+        return redirect(route('ticket.index'));
     }
 
     /**
@@ -64,6 +68,7 @@ class TicketController extends Controller
     public function show(Ticket $ticket)
     {
         //
+        return view('ticket.show', compact('ticket'));
     }
 
     /**
@@ -88,5 +93,8 @@ class TicketController extends Controller
     public function destroy(Ticket $ticket)
     {
         //
+        $ticket->delete();
+
+        return redirect(route('ticket.index'));
     }
 }

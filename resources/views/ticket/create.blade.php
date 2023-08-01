@@ -5,9 +5,6 @@
                 Create a new support ticket
             </h2>
         </header>
-        <form id="send-verification" method="post" action="{{ route('verification.send') }}">
-            @csrf
-        </form>
         @if (session('message'))
             <div class="mt-2 text-sm text-green-600 dark:text-red-400 space-y-1">
                {{ session('message') }}

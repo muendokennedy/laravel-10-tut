@@ -24,7 +24,7 @@ Route::get('/', function () {
     return view('welcome');
     // Runnig sql queries in laravel -> make use of the DB facade
     // Selecting users from the database
-     // $users = DB::select("select * from users");
+    // $users = DB::select("select * from users");
     //  $users = DB::table('users')->find(3);
     // $users = User::all();
     // $user = User::find(1);
@@ -55,7 +55,7 @@ Route::get('/', function () {
     // $user = DB::table('users')->where('id', 4)->delete();
     // $user = User::find(5)->delete();
 
-        // dd($user->name);
+    // dd($user->name);
 });
 
 Route::get('/dashboard', function () {
@@ -71,7 +71,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/avatar.ai', [AvartarController::class, 'generate'])->name('profile.avatar.ai');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 // Aunthentication using github
 
@@ -79,7 +79,6 @@ Route::post('/auth/redirect', [GithubAuthController::class, 'redirect'])->name('
 
 Route::get('/auth/callback', [GithubAuthController::class, 'callback']);
 
-Route::middleware('auth')->prefix('ticket')->name('ticket.')->group(function(){
-    Route::resource('/', TicketController::class);
+Route::middleware('auth')->group(function () {
+    Route::resource('/ticket', TicketController::class);
 });
-
