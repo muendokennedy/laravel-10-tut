@@ -18,7 +18,9 @@
         @endif
       </div>
       <div class="flex justify-between">
-        <x-primary-button>Edit</x-primary-button>
+        <a href="{{ route('ticket.edit', $ticket->id) }}">
+          <x-primary-button>Edit</x-primary-button>
+        </a>
         <form action="{{ route('ticket.destroy', $ticket->id) }}" method="post">
           @csrf
           @method('delete')
