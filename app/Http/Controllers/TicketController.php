@@ -75,10 +75,7 @@ class TicketController extends Controller
     public function update(UpdateTicketRequest $request, Ticket $ticket)
     {
         //
-        $ticket->update([
-            'title' => $request->title,
-            'description' => $request->description
-        ]);
+        $ticket->update($request->except('attachment'));
 
         if ($request->file('attachment')) {
 
@@ -87,7 +84,7 @@ class TicketController extends Controller
             $this->storeAttachment($request, $ticket);
         }
 
-        return redirect(route('ticket.index'));
+        return redirect(route('ticket.show', compact('ticket')));
     }
 
     /**

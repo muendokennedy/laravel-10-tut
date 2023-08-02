@@ -18,14 +18,35 @@
         @endif
       </div>
       <div class="flex justify-between">
-        <a href="{{ route('ticket.edit', $ticket->id) }}">
-          <x-primary-button>Edit</x-primary-button>
-        </a>
-        <form action="{{ route('ticket.destroy', $ticket->id) }}" method="post">
-          @csrf
-          @method('delete')
-          <x-primary-button>Delete</x-primary-button>
-        </form>
+        <div class="flex">
+            <a href="{{ route('ticket.edit', $ticket->id) }}">
+              <x-primary-button>Edit</x-primary-button>
+            </a>
+            <form class="ml-2" action="{{ route('ticket.destroy', $ticket->id) }}" method="post">
+              @csrf
+              @method('delete')
+              <x-primary-button>Delete</x-primary-button>
+            </form>
+        </div>
+        @if (auth()->user()->isAdmin)
+        <div class="flex">
+            <form action="{{ route('ticket.update', $ticket->id)}}" method="post">
+                @csrf
+                @method('patch')
+                <input type="hidden" name="status" value="resolved">
+                <x-primary-button>Approve</x-primary-button>
+            </form>
+            <form action="{{ route('ticket.update', $ticket->id)}}" method="post">
+                @csrf
+                @method('patch')
+                <input type="hidden" name="status" value="rejected">
+                <x-primary-button class="ml-2">Reject</x-primary-button>
+            </form>
+            </form>
+        </div>
+        @else
+        <p>Status: {{ $ticket->status }}</p>
+        @endif
       </div>
     </div>
   </div>

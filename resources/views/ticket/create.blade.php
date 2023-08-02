@@ -22,7 +22,7 @@
             </div>
             <div>
                 <x-input-label for="description" :value="__('Description')" />
-                <x-textarea name="description" id="description"/>
+                <x-textarea name="description" id="description" value=""/>
                 @if($errors->any())
                 <p class="mt-2 text-sm text-red-600 dark:text-red-400 space-y-1">{{ $errors->first('description')}}</p>
                 @endif

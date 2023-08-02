@@ -1,7 +1,7 @@
 <x-app-layout>
   <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
     <h1 class="text-black text-lg font-bold">Your support tickets</h1>
-    @foreach ($tickets as $ticket )
+    @forelse ($tickets as $ticket)
     <div class="w-full sm:max-w-xl mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
       <div class="flex justify-between">
         <div class="flex flex-col justify-center">
@@ -20,6 +20,8 @@
         <x-primary-button>view</x-primary-button>
       </a>
     </div>
-    @endforeach
+    @empty
+    <p>You don't have any support ticket yet</p>
+    @endforelse
   </div>
 </x-app-layout>
